@@ -1,0 +1,29 @@
+# Dependencies and local tooling
+node_modules/
+.wrangler/
+.venv/
+venv/
+__pycache__/
+*.pyc
+
+# Secrets and local configuration
+.env
+.env.*
+!.env.example
+.dev.vars
+.dev.vars.*
+
+# Generated RAG data and logs
+cloudflare-rag-eplan-p8/migration/data/
+cloudflare-rag-eecpro/migration/data/
+*.ndjson
+*.db
+*.sqlite3
+*.log
+logs/
+
+# Editor and OS files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
