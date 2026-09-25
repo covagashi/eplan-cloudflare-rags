@@ -1,0 +1,22 @@
+{
+  "name": "eplan-symbols",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-03-23",
+
+  // Vectorize index with CLIP ViT-B/32 embeddings (512-dim) of the
+  // covaga/electrical-symbols-dataset EPLAN symbols (33,502 vectors).
+  "vectorize": [
+    {
+      "binding": "SYMBOLS",
+      "index_name": "eplan-symbols"
+    }
+  ],
+
+  // Public endpoint, same pattern as rag2027.covaga.xyz
+  "routes": [
+    {
+      "pattern": "symbols.covaga.xyz",
+      "custom_domain": true
+    }
+  ]
+}

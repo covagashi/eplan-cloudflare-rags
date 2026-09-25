@@ -1,0 +1,20 @@
+name: Deploy eplan-symbols worker
+
+# Deploys the public symbol visual-RAG Worker (symbols.covaga.xyz).
+# Manual trigger — re-run after editing cloudflare-rag-symbols/worker/.
+
+on:
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    env:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CF_ACCOUNT_ID }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Deploy worker
+        working-directory: cloudflare-rag-symbols/worker
+        run: npx wrangler@4 deploy
