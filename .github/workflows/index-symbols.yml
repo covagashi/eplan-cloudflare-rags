@@ -1,0 +1,35 @@
+name: Index EPLAN symbols into Vectorize
+
+# One-shot batch job: embeds all 33.5k symbol images with CLIP ViT-B/32
+# and inserts vectors + metadata into the `eplan-symbols` Vectorize index.
+# Trigger manually from the Actions tab ("Run workflow").
+
+on:
+  workflow_dispatch:
+    inputs:
+      limit:
+        description: "Max symbols to index (0 = all 33.5k). Use 500 for a test run."
+        required: false
+        default: "0"
+
+jobs:
+  index:
+    runs-on: ubuntu-latest
+    timeout-minutes: 300
+    env:
+      CF_ACCOUNT_ID: ${{ secrets.CF_ACCOUNT_ID }}
+      CF_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
+      LIMIT: ${{ github.event.inputs.limit }}
+      HF_HUB_DISABLE_PROGRESS_BARS: "1"
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - run: pip install sentence-transformers datasets pillow requests
+
+      - name: Compute CLIP embeddings and insert into Vectorize
+        run: python cloudflare-rag-symbols/index_symbols.py
