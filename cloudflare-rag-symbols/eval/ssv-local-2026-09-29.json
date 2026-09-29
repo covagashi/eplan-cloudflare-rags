@@ -1,0 +1,44 @@
+{
+  "date": "2026-09-29",
+  "ground_truth_from_user": {
+    "library": "IEC_symbol",
+    "number": "3",
+    "short_name": "SSV",
+    "variant": null
+  },
+  "image_size": [
+    93,
+    93
+  ],
+  "source_rows_by_variant": {
+    "A": 8,
+    "B": 8,
+    "C": 8,
+    "D": 8
+  },
+  "eplan_catalog_variant_numbers": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    16
+  ],
+  "shape_f1_by_source_variant": {
+    "A": 0.6891,
+    "B": 0.0813,
+    "C": 0.2304,
+    "D": 0.0949
+  },
+  "clip_cosine_by_source_variant": {
+    "A": 0.8541,
+    "B": 0.8312,
+    "C": 0.857,
+    "D": 0.8243
+  },
+  "interpretation": "The image resembles source variant A; exact EPLAN variant remains unverified.",
+  "public_query": "not run: automatic approval review rejected egress of this new image embedding"
+}

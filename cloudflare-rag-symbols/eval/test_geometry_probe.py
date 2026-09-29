@@ -32,6 +32,23 @@ class GeometryProbeTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "multiple"):
             signature(pair, "relay")
 
+    def test_simple_signature_keeps_small_disconnected_terminal(self):
+        image = Image.new("RGB", (80, 80), "white")
+        draw = ImageDraw.Draw(image)
+        draw.line((20, 40, 45, 40, 45, 60), fill="blue", width=2)
+        base = signature(image, "simple")
+        draw.line((45, 20, 45, 26), fill="blue", width=2)
+        with_terminal = signature(image, "simple")
+        self.assertFalse(np.array_equal(base, with_terminal))
+
+    def test_simple_rejects_two_major_glyphs(self):
+        image = Image.new("RGB", (100, 70), "white")
+        draw = ImageDraw.Draw(image)
+        draw.line((15, 20, 25, 20, 25, 50), fill="blue", width=2)
+        draw.line((65, 20, 75, 20, 75, 50), fill="blue", width=2)
+        with self.assertRaisesRegex(ValueError, "multiple"):
+            signature(image, "simple")
+
     def test_two_large_plug_components_require_separate_crops(self):
         image = Image.new("RGB", (130, 90), "white")
         draw = ImageDraw.Draw(image)

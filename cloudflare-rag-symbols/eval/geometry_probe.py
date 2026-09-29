@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Offline geometry probe for local symbol renders and screenshots.
 
-This evaluates two narrow shape families; it does not identify arbitrary
+This evaluates three narrow shape families; it does not identify arbitrary
 symbols or authorize automatic placement. Image paths stay local.
 """
 import argparse
@@ -77,12 +77,27 @@ def largest_component(mask):
     return normalized(component, (64, 128))
 
 
+def whole_glyph(mask):
+    components, count = label(mask, structure=np.ones((3, 3), dtype=int))
+    if not count:
+        raise ValueError("no symbol strokes found")
+    sizes = np.bincount(components.ravel())
+    sizes[0] = 0
+    if len(sizes) > 2 and np.partition(sizes, -2)[-2] >= 0.5 * sizes.max():
+        raise ValueError("multiple substantial components")
+    ys, xs = np.where(mask)
+    crop = mask[ys.min():ys.max() + 1, xs.min():xs.max() + 1]
+    return normalized(crop, (64, 96))
+
+
 def signature(image, kind):
     mask = stroke_mask(image)
     if kind == "relay":
         return relay_interior(mask)
     if kind == "plug":
         return largest_component(mask)
+    if kind == "simple":
+        return whole_glyph(mask)
     raise ValueError(f"unsupported shape family: {kind}")
 
 
@@ -119,28 +134,31 @@ def main():
         if case.get("crop"):
             image = image.crop(tuple(case["crop"]))
         kind = case["kind"]
+        expected = case.get("expected")
         result = {"tag": case["tag"], "kind": kind,
-                  "expected": case["expected"]}
+                  "expected": expected}
         try:
             query = signature(image, kind)
             scores = {name: round(f1(query, template), 4)
-                      for name, template in templates[kind].items()}
+                      for name, template in sorted(templates[kind].items())}
             winner = max(scores, key=scores.get)
-            result.update(winner=winner, correct=winner == case["expected"],
+            result.update(winner=winner,
+                          correct=(winner == expected if expected is not None else None),
                           scores=scores)
         except ValueError as error:
             result.update(winner="ABSTAIN",
-                          correct=case["expected"] == "ABSTAIN",
+                          correct=(expected == "ABSTAIN" if expected is not None else None),
                           reason=str(error))
         results.append(result)
     if not results:
         raise ValueError("no cases")
     report = {
-        "method": "foreground strokes; relay first-chamber F1 or largest-component F1",
+        "method": "foreground strokes; relay interior, plug component, or simple whole-glyph F1",
         "status": "exploratory; templates and queries share symbol identities",
         "cases": results,
-        "correct": sum(row["correct"] for row in results),
-        "total": len(results),
+        "correct": sum(row["correct"] is True for row in results),
+        "total": sum(row["correct"] is not None for row in results),
+        "unlabeled": sum(row["correct"] is None for row in results),
     }
     output = json.dumps(report, indent=2) + "\n"
     if args.output:

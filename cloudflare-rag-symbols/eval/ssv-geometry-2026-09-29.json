@@ -1,0 +1,22 @@
+{
+  "method": "foreground strokes; relay interior, plug component, or simple whole-glyph F1",
+  "status": "exploratory; templates and queries share symbol identities",
+  "cases": [
+    {
+      "tag": "ssv-user",
+      "kind": "simple",
+      "expected": null,
+      "winner": "A",
+      "correct": null,
+      "scores": {
+        "A": 0.6891,
+        "B": 0.0813,
+        "C": 0.2304,
+        "D": 0.0949
+      }
+    }
+  ],
+  "correct": 0,
+  "total": 0,
+  "unlabeled": 1
+}

@@ -19,7 +19,9 @@ MODEL_ID = "sentence-transformers/clip-ViT-B-32"
 MODEL_REVISION = "327ab6726d33c0e22f920c83f2ff9e4bd38ca37f"
 PARQUET_FILE = "data/train-00000-of-00001.parquet"
 HARD_CASES = (("KS", "402", "A"), ("KT2", "190", "A"),
-              ("X2_ST", "1363", "A"), ("DCP2M", "393", "A"))
+              ("X2_ST", "1363", "A"), ("DCP2M", "393", "A"),
+              ("SSV", "3", "A"), ("SSV", "3", "B"),
+              ("SSV", "3", "C"), ("SSV", "3", "D"))
 BATCH = 500
 
 

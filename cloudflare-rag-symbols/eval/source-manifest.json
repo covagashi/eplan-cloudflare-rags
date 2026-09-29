@@ -18,6 +18,26 @@
       "present": true,
       "source_rows": 8
     },
+    "SSV/3/A": {
+      "image_sha256": "b8d0b245927b2a9cbf156a9f4c4d7cf47ae557e4355a38b04b68ca1334adf514",
+      "present": true,
+      "source_rows": 8
+    },
+    "SSV/3/B": {
+      "image_sha256": "890cda46fd9ec1d62eb048fca56fee4c3f6f8ed5280d733a55d9304d3ba447f9",
+      "present": true,
+      "source_rows": 8
+    },
+    "SSV/3/C": {
+      "image_sha256": "7e8e637e6c291bbde47132b617be8a9e5c3f34fcbdbbdff9ef481dccc8206af3",
+      "present": true,
+      "source_rows": 8
+    },
+    "SSV/3/D": {
+      "image_sha256": "0c9d7f4ac16781469e0f5c6549208517850f3c93f3422623d797c506ec7b4b1b",
+      "present": true,
+      "source_rows": 8
+    },
     "X2_ST/1363/A": {
       "image_sha256": "10bca1538ed0aff4f29bb0d8c3f78d19fce1fe5434d3c1c6ec5f44a190bfd431",
       "present": true,

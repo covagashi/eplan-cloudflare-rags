@@ -42,9 +42,10 @@ Run `python cloudflare-rag-symbols/eval/benchmark.py fixtures.jsonl --endpoint h
 
 ## Offline geometry probe
 
-`geometry_probe.py` compares two narrow families with local templates: the
-first chamber of rectangular relay symbols (KS/KT2), and the largest connected
-component of plug symbols (X2_ST/DCP2M). It accepts blue or dark strokes,
+`geometry_probe.py` compares three narrow families with local templates: the
+first chamber of rectangular relay symbols (KS/KT2), the largest connected
+component of plug symbols (X2_ST/DCP2M), and the complete foreground glyph
+for a simple symbol such as SSV. It accepts blue or dark strokes,
 removes text outside the selected geometry, and rejects images containing
 multiple substantial shapes. It needs `numpy`, `scipy`, and `pillow`.
 
@@ -68,3 +69,14 @@ The low-resolution DCP2M example was misclassified. Rotation and reflection
 are orientation changes and must be handled as explicit variants. These
 scores are **not** calibrated confidence and do not meet the held-out release
 gate. No geometry code is wired into the public Worker or automatic placement.
+
+## SSV follow-up
+
+The [SSV local audit](ssv-local-2026-09-29.json) and
+[unlabeled geometry result](ssv-geometry-2026-09-29.json) record the user-provided
+`IEC_symbol / 3 / SSV` image without storing it. The source has A-D, eight
+identical rows per variant, while the live EPLAN catalog exposes variant
+numbers 0-7 and 16. Geometry favors the source A image (F1 0.6891); CLIP
+slightly favors C (0.8570 versus A 0.8541). The EPLAN variant is therefore
+not ground truth yet. The public RAG query was blocked by automatic approval
+review for this new image embedding and has not been retried through REST.

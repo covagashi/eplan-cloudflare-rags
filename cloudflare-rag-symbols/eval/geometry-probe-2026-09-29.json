@@ -1,5 +1,5 @@
 {
-  "method": "foreground strokes; relay first-chamber F1 or largest-component F1",
+  "method": "foreground strokes; relay interior, plug component, or simple whole-glyph F1",
   "status": "exploratory; templates and queries share symbol identities",
   "cases": [
     {
@@ -130,5 +130,6 @@
     }
   ],
   "correct": 12,
-  "total": 12
+  "total": 12,
+  "unlabeled": 0
 }
