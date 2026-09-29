@@ -97,3 +97,17 @@ under cosine similarity, whereas the observed source-template score is
 0.7155. Check the deployed vector, model and preprocessing revisions, index
 metric, and metadata-to-vector mapping. The public response cannot identify
 which of these differs from the audited local pipeline.
+
+## Deployed Worker verification
+
+GitHub Actions [run 36573317600](https://github.com/covagashi/eplan-cloudflare-rags/actions/runs/36573317600)
+completed successfully for commit 388c9d5. The public health endpoint now
+reports result_contract distinct-v1. Repeating both authorized SSV queries
+against the deployed Worker confirmed review_required=true and distinct
+catalog candidates. For the user screenshot, it examined 50 raw neighbors,
+returned nine distinct candidates, and still did not return SSV/3/A. For
+the audited SSV/3/A source template, it examined 50 raw neighbors and
+returned 13 distinct candidates, with SSV/3/A at rank 1 (score 0.7155,
+eight duplicate source rows). The live index was not rebuilt. The Worker
+improves result presentation and uncertainty handling; the SSV recall
+failure remains open.

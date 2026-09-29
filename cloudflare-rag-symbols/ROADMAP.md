@@ -1,6 +1,6 @@
 # Visual symbol RAG improvement roadmap
 
-Status: implementation in progress, 2026-09-29. The live service has not been re-indexed or deployed.
+Status: Worker deployed and verified on 2026-09-29; the live index has not been rebuilt.
 
 ## Verified source audit (2026-09-29)
 
@@ -12,7 +12,7 @@ An offline geometry probe now isolates the KS/KT2 relay mark or the X2_ST/DCP2M 
 
 The user confirmed IEC_symbol / 3 / SSV, variant A, and that C is its mirror. The source contains A-D (eight identical rows each), while live EPLAN lists nine variant numbers. Local shape F1 selected A (0.6891); CLIP favored C (0.8570 versus A 0.8541), and four crop conditions did not reverse that order. The authorized public REST query with the user screenshot's vector returned 20 rows but only four distinct identities; no SSV/3 variant appeared, and VPZ/81/B led at 0.5589. The MCP call did not return after more than two minutes. A separate source-template vector query, explicitly authorized by the user, returned SSV/3/A at rank 1 (0.7155) among 20 raw rows and six distinct identities. See [SSV audit](eval/ssv-local-2026-09-29.json) and [geometry result](eval/ssv-geometry-2026-09-29.json). SSV/3/A is present as public search metadata, but the deployed vector is unverified. Source A first appears at row 348; its local cosine to the user image is 0.8541, above the public user-image top score. If the deployed vector and cosine pipeline matched the audited source, a source-template self-query would score approximately 1. Audit deployed vector provenance, model and preprocessing revision, index metric, and metadata-to-vector mapping before attributing the miss to visual similarity alone.
 
-Implemented: deterministic source audit and manifest, staged unique-identity indexer, Worker distinct-result grouping and review-required status, local benchmark harness, and MCP client TLS/system-trust plus cautious candidate text. Worker and audit tests pass. The visual hard-pair and held-out release gates remain open; no candidate index was created or promoted.
+Implemented: deterministic source audit and manifest, staged unique-identity indexer, Worker distinct-result grouping and review-required status, local benchmark harness, and MCP client TLS/system-trust plus cautious candidate text. Worker and audit tests pass. The Worker was deployed by [run 36573317600](https://github.com/covagashi/eplan-cloudflare-rags/actions/runs/36573317600); the public health endpoint reports distinct-v1. On a repeat SSV check, the user screenshot yielded nine distinct candidates from 50 raw neighbors and review_required=true, but SSV/3/A was still absent. The source template returned SSV/3/A first and 13 distinct candidates from 50 raw neighbors. The visual hard-pair and held-out release gates remain open; no candidate index was created or promoted.
 
 ## Evidence and scope
 

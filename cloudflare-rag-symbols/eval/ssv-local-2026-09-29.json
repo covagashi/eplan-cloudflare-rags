@@ -167,5 +167,33 @@
     "C": 350,
     "D": 351
   },
-  "conditional_index_diagnosis": "The local user-image-to-source-A cosine is 0.8541, while the public user-image top score is 0.5589 and the public source-template-to-SSV/3/A score is 0.7155. If the deployed index stored this exact normalized source embedding and reported cosine similarity, its self-query score should be approximately 1 and the user image should rank SSV/3/A above the observed 0.5589 results. The mismatch prioritizes checking deployed vector provenance, embedding/model revision, preprocessing, index metric, and metadata-to-vector mapping. Public responses alone cannot distinguish these causes."
+  "conditional_index_diagnosis": "The local user-image-to-source-A cosine is 0.8541, while the public user-image top score is 0.5589 and the public source-template-to-SSV/3/A score is 0.7155. If the deployed index stored this exact normalized source embedding and reported cosine similarity, its self-query score should be approximately 1 and the user image should rank SSV/3/A above the observed 0.5589 results. The mismatch prioritizes checking deployed vector provenance, embedding/model revision, preprocessing, index metric, and metadata-to-vector mapping. Public responses alone cannot distinguish these causes.",
+  "deployed_worker_verification": {
+    "workflow_run": "https://github.com/covagashi/eplan-cloudflare-rags/actions/runs/36573317600",
+    "workflow_conclusion": "success",
+    "head_commit": "388c9d5629eb6ddc63b473c139a818d080929528",
+    "health_result_contract": "distinct-v1",
+    "index_rebuilt": false,
+    "user_image_query": {
+      "raw_neighbors_examined": 50,
+      "returned_distinct": 9,
+      "requested_distinct": 20,
+      "review_required": true,
+      "top_identity": "VPZ/81/B",
+      "top_score": 0.5589,
+      "ssv_A_returned": false,
+      "pool_exhausted": true
+    },
+    "source_template_A_query": {
+      "raw_neighbors_examined": 50,
+      "returned_distinct": 13,
+      "requested_distinct": 20,
+      "review_required": true,
+      "top_identity": "SSV/3/A",
+      "top_score": 0.7155,
+      "duplicate_count_for_top_identity": 8,
+      "pool_exhausted": true
+    },
+    "interpretation": "The deployed Worker groups duplicate rows and requires review. It does not recover SSV/3/A for the user image within the first 50 raw index neighbors, so relevance remains unresolved."
+  }
 }
