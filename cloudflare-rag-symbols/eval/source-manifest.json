@@ -1,0 +1,34 @@
+{
+  "dataset_id": "covaga/electrical-symbols-dataset",
+  "dataset_revision": "5fcf89e9cbbf7256fc07890a21a25ae92c5f0dfc",
+  "exact_duplicate_rows": 24057,
+  "hard_cases": {
+    "DCP2M/393/A": {
+      "image_sha256": "bcd88ffe6bb06c8a3e3bcd5c8fb79c253da86151860b2f2e0a575c0c20a3c5b5",
+      "present": true,
+      "source_rows": 1
+    },
+    "KS/402/A": {
+      "image_sha256": "5b76646231e1d9e7e524f0da28d315e55ac54a63d8b5afafd047ca3c02f1b3ca",
+      "present": true,
+      "source_rows": 8
+    },
+    "KT2/190/A": {
+      "image_sha256": "82ad90de5b5567ac281228dbee28b6ed5a59062bd4cebcc1aedb8da0a24547db",
+      "present": true,
+      "source_rows": 8
+    },
+    "X2_ST/1363/A": {
+      "image_sha256": "10bca1538ed0aff4f29bb0d8c3f78d19fce1fe5434d3c1c6ec5f44a190bfd431",
+      "present": true,
+      "source_rows": 8
+    }
+  },
+  "library_column_present": false,
+  "model_id": "sentence-transformers/clip-ViT-B-32",
+  "model_revision": "327ab6726d33c0e22f920c83f2ff9e4bd38ca37f",
+  "parquet_sha256": "ef50fdd39bc26a5d3a1cbe017c8e61d52427ac47da36e0857f5760e2cd0f2dd2",
+  "preprocessing": "PIL RGB; SentenceTransformer normalized image embedding",
+  "source_rows": 33502,
+  "unique_identities": 9445
+}

@@ -1,14 +1,21 @@
-name: Index EPLAN symbols into Vectorize
-
-# One-shot batch job: embeds all 33.5k symbol images with CLIP ViT-B/32
-# and inserts vectors + metadata into the `eplan-symbols` Vectorize index.
-# Trigger manually from the Actions tab ("Run workflow").
+name: Audit and index EPLAN symbols
 
 on:
   workflow_dispatch:
     inputs:
+      audit_only:
+        description: "Audit source without inserting vectors"
+        type: boolean
+        required: true
+        default: true
+      candidate_index:
+        description: "Existing empty Vectorize V2 candidate index (512 dimensions, cosine)"
+        type: string
+        required: false
+        default: "eplan-symbols-candidate"
       limit:
-        description: "Max symbols to index (0 = all 33.5k). Use 500 for a test run."
+        description: "Maximum unique identities to index; 0 means all"
+        type: string
         required: false
         default: "0"
 
@@ -19,16 +26,25 @@ jobs:
     env:
       CF_ACCOUNT_ID: ${{ secrets.CF_ACCOUNT_ID }}
       CF_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
-      LIMIT: ${{ github.event.inputs.limit }}
+      VECTORIZE_INDEX: ${{ inputs.candidate_index }}
+      LIMIT: ${{ inputs.limit }}
       HF_HUB_DISABLE_PROGRESS_BARS: "1"
+      HF_HUB_DISABLE_XET: "1"
     steps:
       - uses: actions/checkout@v4
-
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
-
-      - run: pip install sentence-transformers datasets pillow requests
-
-      - name: Compute CLIP embeddings and insert into Vectorize
-        run: python cloudflare-rag-symbols/index_symbols.py
+      - run: pip install sentence-transformers pyarrow huggingface_hub pillow requests
+      - name: Audit or index unique symbols
+        run: |
+          if [ "${{ inputs.audit_only }}" = "true" ]; then
+            python cloudflare-rag-symbols/index_symbols.py --audit-only --manifest cloudflare-rag-symbols/eval/source-manifest.json
+          else
+            python cloudflare-rag-symbols/index_symbols.py --manifest cloudflare-rag-symbols/eval/source-manifest.json
+          fi
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: symbol-source-manifest
+          path: cloudflare-rag-symbols/eval/source-manifest.json

@@ -1,10 +1,15 @@
 # Visual symbol RAG improvement roadmap
 
-Status: proposed, 2026-09-28. This roadmap does not re-index or deploy the service.
+Status: implementation in progress, 2026-09-29. The live service has not been re-indexed or deployed.
 
+## Verified source audit (2026-09-29)
+
+The pinned source parquet contains 33,502 rows and **9,445 distinct `(short_name, number, variant_id)` identities**. All 24,057 excess rows are byte-identical copies within their identities; no identity has conflicting image bytes. KS/402/A, KT2/190/A, and X2_ST/1363/A each occur eight times with one image hash. DCP2M/393/A occurs once. The source has **no library column**, so source metadata cannot prove the full EPLAN library identity. The deployed Vectorize inventory remains unverified because account credentials are unavailable locally.
+
+Implemented: deterministic source audit and manifest, staged unique-identity indexer, Worker distinct-result grouping and review-required status, local benchmark harness, and MCP client TLS/system-trust plus cautious candidate text. Worker and audit tests pass. The visual hard-pair and held-out release gates remain open; no candidate index was created or promoted.
 ## Evidence and scope
 
-The current indexer embeds each dataset image with CLIP ViT-B/32 and stores one Vectorize row per source row. The Worker returns nearest rows and their metadata. The query client uses the same CLIP model and normalized embeddings, so the source does not show an obvious model mismatch.
+The original deployed pipeline embedded each dataset row with CLIP ViT-B/32 and returned raw nearest rows. The new candidate indexer collapses identical source rows, and the updated Worker groups raw neighbors by catalog code. The MCP client still uses the same CLIP model and normalized embeddings, so the measured fine-geometry failure remains a separate issue.
 
 | Observation | Verified ground truth | Result |
 | --- | --- | --- |

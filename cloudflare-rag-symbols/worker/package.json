@@ -1,0 +1,14 @@
+{
+  "name": "eplan-symbols-worker",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --experimental-strip-types --test test/*.test.mjs",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^5.20260926.1",
+    "typescript": "^5.5.0",
+    "wrangler": "^4.10.0"
+  }
+}
