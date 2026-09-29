@@ -79,8 +79,58 @@
     "ssv_code_in_top_20_raw": false,
     "review_required_field": null,
     "mcp_result": "did not return after more than two minutes; REST fallback completed",
-    "source_template_probe": "blocked by automatic approval review because it is a different embedding",
-    "interpretation": "Cannot distinguish absent index row from poor rank without index inventory or an authorized source-template query."
+    "source_template_probe": {
+      "input": "512-number normalized CLIP vector from audited source template SSV/3/A; explicitly authorized by the user",
+      "raw_neighbors": 20,
+      "distinct_identities": 6,
+      "distinct_candidates": [
+        {
+          "rank": 1,
+          "short_name": "SSV",
+          "number": "3",
+          "variant_id": "A",
+          "score": 0.7155
+        },
+        {
+          "rank": 2,
+          "short_name": "DU",
+          "number": "24",
+          "variant_id": "A",
+          "score": 0.6466
+        },
+        {
+          "rank": 3,
+          "short_name": "SREED",
+          "number": "1216",
+          "variant_id": "A",
+          "score": 0.6456
+        },
+        {
+          "rank": 4,
+          "short_name": "PIDIBAN_03",
+          "number": "583",
+          "variant_id": "B",
+          "score": 0.6423
+        },
+        {
+          "rank": 5,
+          "short_name": "BET_20",
+          "number": "1520",
+          "variant_id": "C",
+          "score": 0.6394
+        },
+        {
+          "rank": 6,
+          "short_name": "KL",
+          "number": "4",
+          "variant_id": "D",
+          "score": 0.6366
+        }
+      ],
+      "exact_variant_a_rank": 1,
+      "review_required_field": null
+    },
+    "interpretation": "The public index returns SSV/3/A at rank 1 for the audited source-template query, so the catalog identity is present in public search results. It does not appear among the first 20 raw neighbors for the user screenshot. The endpoint exposes neither the stored vector nor source row/model version, so identity presence does not establish that the stored embedding matches the audited template."
   },
   "clip_crop_probe": {
     "method": "crop foreground bbox, center on square white canvas with side twice glyph max dimension, resize to 224 px",
@@ -117,5 +167,5 @@
     "C": 350,
     "D": 351
   },
-  "conditional_index_diagnosis": "Local query-to-source A cosine is 0.8541, greater than the public top score 0.5589. If the deployed index contained the same source vector with the declared normalized CLIP cosine pipeline, A should outrank all returned rows. Coverage or embedding compatibility must be verified; this does not prove which failed."
+  "conditional_index_diagnosis": "The local user-image-to-source-A cosine is 0.8541, while the public user-image top score is 0.5589 and the public source-template-to-SSV/3/A score is 0.7155. If the deployed index stored this exact normalized source embedding and reported cosine similarity, its self-query score should be approximately 1 and the user image should rank SSV/3/A above the observed 0.5589 results. The mismatch prioritizes checking deployed vector provenance, embedding/model revision, preprocessing, index metric, and metadata-to-vector mapping. Public responses alone cannot distinguish these causes."
 }

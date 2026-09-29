@@ -81,12 +81,19 @@ CLIP slightly favored mirrored C (0.8570 versus A 0.8541). Four local
 foreground-crop conditions did not change that ordering.
 
 With authorization for the submitted image's vector, the public REST query
-returned 20 rows but only four distinct identities. SSV/3/A and every SSV/3
-variant were absent; the first result was VPZ/81/B at 0.5589. The MCP call
-did not return after more than two minutes, so REST was used. A separate
-source-template vector query was rejected by automatic approval review and
-was not retried. The current evidence cannot distinguish a missing deployed
-row from an embedding/model mismatch. The source A image starts at row 348,
-and the local query-to-source A cosine is 0.8541, higher than the public
-top score 0.5589. If the declared index pipeline is actually deployed, A
-should outrank every returned row. The deployed vectors remain unverified.
+returned 20 rows but only four distinct identities. No SSV/3 variant appeared;
+the first result was VPZ/81/B at 0.5589. The MCP call did not return after
+more than two minutes, so REST was used. The user then explicitly authorized
+a separate query using the audited SSV/3/A source template's CLIP vector.
+That query returned SSV/3/A at rank 1 with score 0.7155, among 20 raw rows
+and six distinct identities. The catalog identity is therefore present in
+public search results, but its indexed vector and source-row provenance are
+not exposed.
+
+The audited source A image starts at row 348. Its local cosine to the user
+image is 0.8541, higher than the public user-image top score of 0.5589.
+An exact normalized source-vector self-query would score approximately 1
+under cosine similarity, whereas the observed source-template score is
+0.7155. Check the deployed vector, model and preprocessing revisions, index
+metric, and metadata-to-vector mapping. The public response cannot identify
+which of these differs from the audited local pipeline.
