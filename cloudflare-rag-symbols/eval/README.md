@@ -78,5 +78,6 @@ The [SSV local audit](ssv-local-2026-09-29.json) and
 identical rows per variant, while the live EPLAN catalog exposes variant
 numbers 0-7 and 16. Geometry favors the source A image (F1 0.6891); CLIP
 slightly favors C (0.8570 versus A 0.8541). The EPLAN variant is therefore
-not ground truth yet. The public RAG query was blocked by automatic approval
+not ground truth yet. Cropping and centering the foreground did not change
+CLIP's A/C ranking in four local preprocessing conditions. The public RAG query was blocked by automatic approval
 review for this new image embedding and has not been retried through REST.

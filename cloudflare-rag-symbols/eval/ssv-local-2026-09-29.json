@@ -40,5 +40,33 @@
     "D": 0.8243
   },
   "interpretation": "The image resembles source variant A; exact EPLAN variant remains unverified.",
-  "public_query": "not run: automatic approval review rejected egress of this new image embedding"
+  "public_query": "not run: automatic approval review rejected egress of this new image embedding",
+  "clip_crop_probe": {
+    "method": "crop foreground bbox, center on square white canvas with side twice glyph max dimension, resize to 224 px",
+    "raw_query_raw_templates": {
+      "A": 0.8541,
+      "B": 0.8312,
+      "C": 0.857,
+      "D": 0.8243
+    },
+    "cropped_query_raw_templates": {
+      "A": 0.8304,
+      "B": 0.8262,
+      "C": 0.8492,
+      "D": 0.8178
+    },
+    "raw_query_cropped_templates": {
+      "A": 0.9242,
+      "B": 0.881,
+      "C": 0.9319,
+      "D": 0.8929
+    },
+    "cropped_query_cropped_templates": {
+      "A": 0.9105,
+      "B": 0.8758,
+      "C": 0.921,
+      "D": 0.8933
+    },
+    "observation": "C ranked above A in all four conditions; cropping alone did not recover the visually matching variant."
+  }
 }
