@@ -4,7 +4,7 @@
     "library": "IEC_symbol",
     "number": "3",
     "short_name": "SSV",
-    "variant": null
+    "variant": "A"
   },
   "image_size": [
     93,
@@ -39,8 +39,49 @@
     "C": 0.857,
     "D": 0.8243
   },
-  "interpretation": "The image resembles source variant A; exact EPLAN variant remains unverified.",
-  "public_query": "not run: automatic approval review rejected egress of this new image embedding",
+  "interpretation": "Confirmed user ground truth is IEC_symbol / 3 / SSV, variant A. Local shape matching selected A; CLIP favored mirrored C.",
+  "public_query": {
+    "endpoint": "https://symbols.covaga.xyz/query",
+    "input": "512-number CLIP vector derived from the user-provided 93x93 SSV image; user authorized this vector",
+    "raw_neighbors": 20,
+    "distinct_identities": 4,
+    "distinct_candidates": [
+      {
+        "rank": 1,
+        "short_name": "VPZ",
+        "number": "81",
+        "variant_id": "B",
+        "score": 0.5589
+      },
+      {
+        "rank": 2,
+        "short_name": "QLTR1",
+        "number": "282",
+        "variant_id": "C",
+        "score": 0.5526
+      },
+      {
+        "rank": 3,
+        "short_name": "BW3SW",
+        "number": "1373",
+        "variant_id": "A",
+        "score": 0.552
+      },
+      {
+        "rank": 4,
+        "short_name": "SSXP",
+        "number": "1227",
+        "variant_id": "D",
+        "score": 0.549
+      }
+    ],
+    "exact_variant_a_in_top_20_raw": false,
+    "ssv_code_in_top_20_raw": false,
+    "review_required_field": null,
+    "mcp_result": "did not return after more than two minutes; REST fallback completed",
+    "source_template_probe": "blocked by automatic approval review because it is a different embedding",
+    "interpretation": "Cannot distinguish absent index row from poor rank without index inventory or an authorized source-template query."
+  },
   "clip_crop_probe": {
     "method": "crop foreground bbox, center on square white canvas with side twice glyph max dimension, resize to 224 px",
     "raw_query_raw_templates": {
@@ -68,5 +109,13 @@
       "D": 0.8933
     },
     "observation": "C ranked above A in all four conditions; cropping alone did not recover the visually matching variant."
-  }
+  },
+  "user_correction": "SSV source variant C is the mirror of A.",
+  "source_first_rows_by_variant": {
+    "A": 348,
+    "B": 349,
+    "C": 350,
+    "D": 351
+  },
+  "conditional_index_diagnosis": "Local query-to-source A cosine is 0.8541, greater than the public top score 0.5589. If the deployed index contained the same source vector with the declared normalized CLIP cosine pipeline, A should outrank all returned rows. Coverage or embedding compatibility must be verified; this does not prove which failed."
 }

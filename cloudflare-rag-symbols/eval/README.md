@@ -72,12 +72,21 @@ gate. No geometry code is wired into the public Worker or automatic placement.
 
 ## SSV follow-up
 
-The [SSV local audit](ssv-local-2026-09-29.json) and
-[unlabeled geometry result](ssv-geometry-2026-09-29.json) record the user-provided
-`IEC_symbol / 3 / SSV` image without storing it. The source has A-D, eight
-identical rows per variant, while the live EPLAN catalog exposes variant
-numbers 0-7 and 16. Geometry favors the source A image (F1 0.6891); CLIP
-slightly favors C (0.8570 versus A 0.8541). The EPLAN variant is therefore
-not ground truth yet. Cropping and centering the foreground did not change
-CLIP's A/C ranking in four local preprocessing conditions. The public RAG query was blocked by automatic approval
-review for this new image embedding and has not been retried through REST.
+The user confirmed `IEC_symbol / 3 / SSV`, variant A, and noted that C is
+its mirror. The [local audit](ssv-local-2026-09-29.json) and
+[geometry result](ssv-geometry-2026-09-29.json) contain no image or vector.
+The source has A-D (eight identical rows per variant), while live EPLAN
+lists variant numbers 0-7 and 16. Geometry selected A (F1 0.6891), while
+CLIP slightly favored mirrored C (0.8570 versus A 0.8541). Four local
+foreground-crop conditions did not change that ordering.
+
+With authorization for the submitted image's vector, the public REST query
+returned 20 rows but only four distinct identities. SSV/3/A and every SSV/3
+variant were absent; the first result was VPZ/81/B at 0.5589. The MCP call
+did not return after more than two minutes, so REST was used. A separate
+source-template vector query was rejected by automatic approval review and
+was not retried. The current evidence cannot distinguish a missing deployed
+row from an embedding/model mismatch. The source A image starts at row 348,
+and the local query-to-source A cosine is 0.8541, higher than the public
+top score 0.5589. If the declared index pipeline is actually deployed, A
+should outrank every returned row. The deployed vectors remain unverified.
