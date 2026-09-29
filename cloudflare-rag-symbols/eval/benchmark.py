@@ -48,7 +48,7 @@ def main():
         pass
 
     cases = []
-    for line in args.fixtures.read_text(encoding="utf-8").splitlines():
+    for line in args.fixtures.read_text(encoding="utf-8-sig").splitlines():
         if not line.strip():
             continue
         fixture = json.loads(line)

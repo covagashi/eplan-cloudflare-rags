@@ -6,6 +6,8 @@ Status: implementation in progress, 2026-09-29. The live service has not been re
 
 The pinned source parquet contains 33,502 rows and **9,445 distinct `(short_name, number, variant_id)` identities**. All 24,057 excess rows are byte-identical copies within their identities; no identity has conflicting image bytes. KS/402/A, KT2/190/A, and X2_ST/1363/A each occur eight times with one image hash. DCP2M/393/A occurs once. The source has **no library column**, so source metadata cannot prove the full EPLAN library identity. The deployed Vectorize inventory remains unverified because account credentials are unavailable locally.
 
+The authorized live baseline on two high-resolution EPLAN renders yielded top-1 exact 0/2 and distinct recall-at-five 0/2. The public endpoint returned 20 raw rows but only four distinct identities for KS and three for KT2 (82.5% mean duplication); it did not return a review-required field. See [baseline metrics](eval/baseline-live-2026-09-29.json). Deduplication alone cannot establish exact visual recognition: local CLIP cosine ranked the wrong source template above the correct one for KS (0.8802 versus 0.8672).
+
 Implemented: deterministic source audit and manifest, staged unique-identity indexer, Worker distinct-result grouping and review-required status, local benchmark harness, and MCP client TLS/system-trust plus cautious candidate text. Worker and audit tests pass. The visual hard-pair and held-out release gates remain open; no candidate index was created or promoted.
 ## Evidence and scope
 

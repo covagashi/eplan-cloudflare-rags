@@ -1,0 +1,25 @@
+{
+    "date":  "2026-09-29",
+    "endpoint":  "https://symbols.covaga.xyz",
+    "fixture_kind":  "two local high-resolution EPLAN renders",
+    "cases":  [
+                  {
+                      "expected":  "KS/402/A",
+                      "top1_exact":  false,
+                      "recall_at_5_distinct":  false,
+                      "raw_neighbors":  20,
+                      "distinct_neighbors":  4
+                  },
+                  {
+                      "expected":  "KT2/190/A",
+                      "top1_exact":  false,
+                      "recall_at_5_distinct":  false,
+                      "raw_neighbors":  20,
+                      "distinct_neighbors":  3
+                  }
+              ],
+    "top1_exact_accuracy":  0.0,
+    "recall_at_5_distinct":  0.0,
+    "mean_duplicate_rate":  0.825,
+    "review_required_rate":  0.0
+}
