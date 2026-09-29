@@ -1,0 +1,134 @@
+{
+  "method": "foreground strokes; relay first-chamber F1 or largest-component F1",
+  "status": "exploratory; templates and queries share symbol identities",
+  "cases": [
+    {
+      "tag": "ks-highres",
+      "kind": "relay",
+      "expected": "KS",
+      "winner": "KS",
+      "correct": true,
+      "scores": {
+        "KS": 0.9189,
+        "KT2": 0.2456
+      }
+    },
+    {
+      "tag": "kt2-highres",
+      "kind": "relay",
+      "expected": "KT2",
+      "winner": "KT2",
+      "correct": true,
+      "scores": {
+        "KS": 0.3103,
+        "KT2": 0.6361
+      }
+    },
+    {
+      "tag": "ks-small",
+      "kind": "relay",
+      "expected": "KS",
+      "winner": "KS",
+      "correct": true,
+      "scores": {
+        "KS": 0.7158,
+        "KT2": 0.3081
+      }
+    },
+    {
+      "tag": "kt2-small",
+      "kind": "relay",
+      "expected": "KT2",
+      "winner": "KT2",
+      "correct": true,
+      "scores": {
+        "KS": 0.2661,
+        "KT2": 0.7184
+      }
+    },
+    {
+      "tag": "ks-user-single",
+      "kind": "relay",
+      "expected": "KS",
+      "winner": "KS",
+      "correct": true,
+      "scores": {
+        "KS": 0.5302,
+        "KT2": 0.2585
+      }
+    },
+    {
+      "tag": "ks-user-pair-left",
+      "kind": "relay",
+      "expected": "KS",
+      "winner": "KS",
+      "correct": true,
+      "scores": {
+        "KS": 0.7158,
+        "KT2": 0.3081
+      }
+    },
+    {
+      "tag": "kt2-user-pair-right",
+      "kind": "relay",
+      "expected": "KT2",
+      "winner": "KT2",
+      "correct": true,
+      "scores": {
+        "KS": 0.2661,
+        "KT2": 0.7184
+      }
+    },
+    {
+      "tag": "x2-user",
+      "kind": "plug",
+      "expected": "X2_ST",
+      "winner": "X2_ST",
+      "correct": true,
+      "scores": {
+        "DCP2M": 0.752,
+        "X2_ST": 0.9094
+      }
+    },
+    {
+      "tag": "dcp2m-placed",
+      "kind": "plug",
+      "expected": "DCP2M",
+      "winner": "DCP2M",
+      "correct": true,
+      "scores": {
+        "DCP2M": 0.9073,
+        "X2_ST": 0.8383
+      }
+    },
+    {
+      "tag": "kt2-placed",
+      "kind": "relay",
+      "expected": "KT2",
+      "winner": "KT2",
+      "correct": true,
+      "scores": {
+        "KS": 0.2587,
+        "KT2": 0.5739
+      }
+    },
+    {
+      "tag": "kr2-negative",
+      "kind": "relay",
+      "expected": "ABSTAIN",
+      "winner": "ABSTAIN",
+      "correct": true,
+      "reason": "rectangle and first divider not found"
+    },
+    {
+      "tag": "kr2-variant-negative",
+      "kind": "relay",
+      "expected": "ABSTAIN",
+      "winner": "ABSTAIN",
+      "correct": true,
+      "reason": "rectangle and first divider not found"
+    }
+  ],
+  "correct": 12,
+  "total": 12
+}

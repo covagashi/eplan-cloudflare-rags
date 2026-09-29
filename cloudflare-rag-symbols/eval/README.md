@@ -39,3 +39,32 @@ A private fixture file can drive the benchmark:
 ```
 
 Run `python cloudflare-rag-symbols/eval/benchmark.py fixtures.jsonl --endpoint https://symbols.covaga.xyz`. This sends a 512-number CLIP embedding derived from each local image to the endpoint; it never sends the image bytes or commits fixtures. Only run against an endpoint approved for those images. The user explicitly authorized sending the two KS/KT2 embeddings on 2026-09-29. The sanitized results are in `baseline-live-2026-09-29.json`: top-1 exact 0/2, distinct recall at five 0/2, and mean duplicate rate 82.5%. The public Worker did not report `review_required`.
+
+## Offline geometry probe
+
+`geometry_probe.py` compares two narrow families with local templates: the
+first chamber of rectangular relay symbols (KS/KT2), and the largest connected
+component of plug symbols (X2_ST/DCP2M). It accepts blue or dark strokes,
+removes text outside the selected geometry, and rejects images containing
+multiple substantial shapes. It needs `numpy`, `scipy`, and `pillow`.
+
+Keep private files outside Git. The templates JSON maps family and identity
+to local paths, for example `{"relay":{"KS":"C:/local/ks.png","KT2":"C:/local/kt2.png"}}`.
+The cases JSONL has `tag`, `image_path`, `kind`, `expected`, and optional
+`crop: [left, top, right, bottom]`. Run:
+
+```powershell
+python cloudflare-rag-symbols/eval/geometry_probe.py templates.json cases.jsonl --output probe.json
+python cloudflare-rag-symbols/eval/geometry_stress.py templates.json cases.jsonl --tags ks-highres kt2-highres x2-user dcp2m-placed --output stress.json
+```
+
+The [exploratory probe](geometry-probe-2026-09-29.json) selected the intended symbol or abstained correctly in 12/12 local cases
+(10 positives and two KR2 negatives); some are related crops of the same
+screenshot, and
+the source templates and queries share identities. The [stress report](geometry-stress-2026-09-29.json)
+selected 18/24 transformed examples correctly: original 4/4, JPEG 4/4,
+grayscale 4/4, half size 3/4, mirror 2/4, and 90-degree rotation 1/4.
+The low-resolution DCP2M example was misclassified. Rotation and reflection
+are orientation changes and must be handled as explicit variants. These
+scores are **not** calibrated confidence and do not meet the held-out release
+gate. No geometry code is wired into the public Worker or automatic placement.

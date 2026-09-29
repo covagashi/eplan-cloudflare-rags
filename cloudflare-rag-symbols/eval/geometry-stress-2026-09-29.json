@@ -1,0 +1,235 @@
+{
+  "status": "exploratory transformations of existing local examples",
+  "cases": [
+    {
+      "tag": "ks-highres",
+      "transform": "original",
+      "winner": "KS",
+      "correct": true,
+      "scores": {
+        "KS": 0.9189,
+        "KT2": 0.2456
+      }
+    },
+    {
+      "tag": "ks-highres",
+      "transform": "half_bilinear",
+      "winner": "KS",
+      "correct": true,
+      "scores": {
+        "KS": 0.5629,
+        "KT2": 0.1884
+      }
+    },
+    {
+      "tag": "ks-highres",
+      "transform": "jpeg35",
+      "winner": "KS",
+      "correct": true,
+      "scores": {
+        "KS": 0.9169,
+        "KT2": 0.2487
+      }
+    },
+    {
+      "tag": "ks-highres",
+      "transform": "mirror",
+      "winner": null,
+      "correct": false,
+      "error": "no mark inside first chamber"
+    },
+    {
+      "tag": "ks-highres",
+      "transform": "rotate90",
+      "winner": null,
+      "correct": false,
+      "error": "rectangle and first divider not found"
+    },
+    {
+      "tag": "ks-highres",
+      "transform": "grayscale",
+      "winner": "KS",
+      "correct": true,
+      "scores": {
+        "KS": 0.9189,
+        "KT2": 0.2456
+      }
+    },
+    {
+      "tag": "kt2-highres",
+      "transform": "original",
+      "winner": "KT2",
+      "correct": true,
+      "scores": {
+        "KS": 0.3103,
+        "KT2": 0.6361
+      }
+    },
+    {
+      "tag": "kt2-highres",
+      "transform": "half_bilinear",
+      "winner": "KT2",
+      "correct": true,
+      "scores": {
+        "KS": 0.2269,
+        "KT2": 0.5799
+      }
+    },
+    {
+      "tag": "kt2-highres",
+      "transform": "jpeg35",
+      "winner": "KT2",
+      "correct": true,
+      "scores": {
+        "KS": 0.3103,
+        "KT2": 0.6361
+      }
+    },
+    {
+      "tag": "kt2-highres",
+      "transform": "mirror",
+      "winner": null,
+      "correct": false,
+      "error": "no mark inside first chamber"
+    },
+    {
+      "tag": "kt2-highres",
+      "transform": "rotate90",
+      "winner": null,
+      "correct": false,
+      "error": "rectangle and first divider not found"
+    },
+    {
+      "tag": "kt2-highres",
+      "transform": "grayscale",
+      "winner": "KT2",
+      "correct": true,
+      "scores": {
+        "KS": 0.3103,
+        "KT2": 0.6361
+      }
+    },
+    {
+      "tag": "x2-user",
+      "transform": "original",
+      "winner": "X2_ST",
+      "correct": true,
+      "scores": {
+        "DCP2M": 0.752,
+        "X2_ST": 0.9094
+      }
+    },
+    {
+      "tag": "x2-user",
+      "transform": "half_bilinear",
+      "winner": "X2_ST",
+      "correct": true,
+      "scores": {
+        "DCP2M": 0.728,
+        "X2_ST": 0.866
+      }
+    },
+    {
+      "tag": "x2-user",
+      "transform": "jpeg35",
+      "winner": "X2_ST",
+      "correct": true,
+      "scores": {
+        "DCP2M": 0.7498,
+        "X2_ST": 0.9128
+      }
+    },
+    {
+      "tag": "x2-user",
+      "transform": "mirror",
+      "winner": "X2_ST",
+      "correct": true,
+      "scores": {
+        "DCP2M": 0.7477,
+        "X2_ST": 0.9012
+      }
+    },
+    {
+      "tag": "x2-user",
+      "transform": "rotate90",
+      "winner": "X2_ST",
+      "correct": true,
+      "scores": {
+        "DCP2M": 0.5146,
+        "X2_ST": 0.5601
+      }
+    },
+    {
+      "tag": "x2-user",
+      "transform": "grayscale",
+      "winner": "X2_ST",
+      "correct": true,
+      "scores": {
+        "DCP2M": 0.7571,
+        "X2_ST": 0.9191
+      }
+    },
+    {
+      "tag": "dcp2m-placed",
+      "transform": "original",
+      "winner": "DCP2M",
+      "correct": true,
+      "scores": {
+        "DCP2M": 0.9073,
+        "X2_ST": 0.8383
+      }
+    },
+    {
+      "tag": "dcp2m-placed",
+      "transform": "half_bilinear",
+      "winner": "X2_ST",
+      "correct": false,
+      "scores": {
+        "DCP2M": 0.8193,
+        "X2_ST": 0.8465
+      }
+    },
+    {
+      "tag": "dcp2m-placed",
+      "transform": "jpeg35",
+      "winner": "DCP2M",
+      "correct": true,
+      "scores": {
+        "DCP2M": 0.9073,
+        "X2_ST": 0.8383
+      }
+    },
+    {
+      "tag": "dcp2m-placed",
+      "transform": "mirror",
+      "winner": "DCP2M",
+      "correct": true,
+      "scores": {
+        "DCP2M": 0.874,
+        "X2_ST": 0.8085
+      }
+    },
+    {
+      "tag": "dcp2m-placed",
+      "transform": "rotate90",
+      "winner": "X2_ST",
+      "correct": false,
+      "scores": {
+        "DCP2M": 0.4636,
+        "X2_ST": 0.4843
+      }
+    },
+    {
+      "tag": "dcp2m-placed",
+      "transform": "grayscale",
+      "winner": "DCP2M",
+      "correct": true,
+      "scores": {
+        "DCP2M": 0.9073,
+        "X2_ST": 0.8383
+      }
+    }
+  ],
+  "correct": 18,
+  "total": 24
+}

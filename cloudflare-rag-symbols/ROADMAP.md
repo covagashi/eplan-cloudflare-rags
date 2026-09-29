@@ -8,6 +8,8 @@ The pinned source parquet contains 33,502 rows and **9,445 distinct `(short_name
 
 The authorized live baseline on two high-resolution EPLAN renders yielded top-1 exact 0/2 and distinct recall-at-five 0/2. The public endpoint returned 20 raw rows but only four distinct identities for KS and three for KT2 (82.5% mean duplication); it did not return a review-required field. See [baseline metrics](eval/baseline-live-2026-09-29.json). Deduplication alone cannot establish exact visual recognition: local CLIP cosine ranked the wrong source template above the correct one for KS (0.8802 versus 0.8672).
 
+An offline geometry probe now isolates the KS/KT2 relay mark or the X2_ST/DCP2M plug component and rejects multi-symbol inputs. It chose the intended symbol or abstained correctly in 12/12 exploratory local cases, including two KR2 negatives, but only 18/24 transformed checks. Half-size DCP2M, mirrored relays, and 90-degree rotations expose unresolved failure modes. See [probe](eval/geometry-probe-2026-09-29.json) and [stress results](eval/geometry-stress-2026-09-29.json). These examples are related and do not constitute a held-out release benchmark.
+
 Implemented: deterministic source audit and manifest, staged unique-identity indexer, Worker distinct-result grouping and review-required status, local benchmark harness, and MCP client TLS/system-trust plus cautious candidate text. Worker and audit tests pass. The visual hard-pair and held-out release gates remain open; no candidate index was created or promoted.
 ## Evidence and scope
 
